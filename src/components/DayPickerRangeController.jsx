@@ -285,13 +285,15 @@ export default class DayPickerRangeController extends React.Component {
     const didFocusChange = focusedInput !== prevFocusedInput;
 
     if (
-      numberOfMonths !== prevNumberOfMonths
-      || enableOutsideDays !== prevEnableOutsideDays
-      || (
-        initialVisibleMonth !== prevInitialVisibleMonth
+      (
+        (
+          numberOfMonths !== prevNumberOfMonths
+          || enableOutsideDays !== prevEnableOutsideDays
+        )
         && !prevFocusedInput
         && didFocusChange
       )
+      || initialVisibleMonth !== prevInitialVisibleMonth
     ) {
       const newMonthState = this.getStateForNewMonth(nextProps);
       const { currentMonth } = newMonthState;

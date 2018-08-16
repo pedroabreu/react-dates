@@ -25,6 +25,7 @@ import getCalendarMonthWidth from '../utils/getCalendarMonthWidth';
 import calculateDimension from '../utils/calculateDimension';
 import getActiveElement from '../utils/getActiveElement';
 import isDayVisible from '../utils/isDayVisible';
+import isSameMonth from '../utils/isSameMonth';
 
 import ModifiersShape from '../shapes/ModifiersShape';
 import ScrollableOrientationShape from '../shapes/ScrollableOrientationShape';
@@ -246,12 +247,13 @@ class DayPicker extends React.Component {
       horizontalMonthPadding,
     } = nextProps;
     const { currentMonth } = this.state;
+    const nextVisibleMonth = nextProps.initialVisibleMonth();
 
     if (!hidden) {
-      if (!this.hasSetInitialVisibleMonth) {
+      if (!this.hasSetInitialVisibleMonth || isSameMonth(nextVisibleMonth, currentMonth)) {
         this.hasSetInitialVisibleMonth = true;
         this.setState({
-          currentMonth: nextProps.initialVisibleMonth(),
+          currentMonth: nextVisibleMonth,
         });
       }
     }
